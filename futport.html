@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ Portfólio FC — Projetos & Craques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060b09;
+  --bg2:#0a1310;
+  --card:#111c17;
+  --card2:#15241e;
+  --line:rgba(255,255,255,.08);
+  --green:#00e07a;
+  --green-d:#0a9d5a;
+  --gold:#ffd54a;
+  --orange:#ff8a5b;
+  --blue:#5ec8ff;
+  --txt:#eaf6f0;
+  --muted:#8fa79b;
+  --radius:22px;
+  --cartoon-shadow:6px 6px 0 rgba(0,0,0,.45);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--green);color:#04120b}
+
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#060b09}
+::-webkit-scrollbar-thumb{background:#1d3329;border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--green-d)}
+
+/* =========================================================
+   ANIMAÇÕES GLOBAIS
+   ========================================================= */
+@keyframes spinBall{to{transform:rotate(360deg)}}
+@keyframes bounceBall{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-42px) rotate(180deg)}
+}
+@keyframes floatBall{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  33%{transform:translate(14px,-18px) rotate(120deg)}
+  66%{transform:translate(-12px,-8px) rotate(240deg)}
+}
+@keyframes wobble{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(-4deg)}
+  75%{transform:rotate(4deg)}
+}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(.6) translateY(30px)}
+  60%{opacity:1;transform:scale(1.05) translateY(-6px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes kick{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  50%{transform:translate(40px,-26px) rotate(360deg)}
+}
+@keyframes grassMove{
+  from{background-position:0 0}
+  to{background-position:80px 0}
+}
+@keyframes shimmer{
+  0%{background-position:-200% 0}
+  100%{background-position:200% 0}
+}
+@keyframes confettiFall{
+  0%{transform:translateY(-20px) rotate(0);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,224,122,.55)}
+  50%{box-shadow:0 0 0 14px rgba(0,224,122,0)}
+}
+@keyframes floatUp{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:rgba(6,11,9,.78);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-weight:900;letter-spacing:.5px;font-size:1.05rem;
+  color:var(--txt);text-decoration:none;
+}
+.brand .ball{
+  display:inline-block;font-size:1.25rem;
+  animation:spinBall 4s linear infinite;
+}
+.brand em{font-style:normal;color:var(--green)}
+.nav-links{display:flex;gap:26px}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:.88rem;
+  font-weight:600;transition:color .25s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;
+  background:var(--green);transition:width .3s;
+}
+.nav-links a:hover{color:var(--green)}
+.nav-links a:hover::after{width:100%}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:130px 24px 100px;overflow:hidden;
+}
+/* campo de futebol animado */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,224,122,.06) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0,224,122,.06) 2px, transparent 2px);
+  background-size:80px 80px;
+  -webkit-mask-image:radial-gradient(circle at 50% 45%, #000 20%, transparent 75%);
+  mask-image:radial-gradient(circle at 50% 45%, #000 20%, transparent 75%);
+  animation:grassMove 4s linear infinite;
+}
+.hero::after{
+  content:'';position:absolute;top:50%;left:50%;
+  width:min(88vw,760px);aspect-ratio:1;transform:translate(-50%,-50%);
+  border:2px dashed rgba(0,224,122,.18);border-radius:50%;
+  pointer-events:none;animation:spinBall 60s linear infinite;
+}
+.hero-glow{
+  position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;
+  background:radial-gradient(ellipse at center, rgba(0,224,122,.18), transparent 65%);
+  pointer-events:none;filter:blur(20px);
+}
+/* bolas flutuantes decorativas */
+.fly-ball{
+  position:absolute;font-size:1.9rem;opacity:.55;
+  pointer-events:none;user-select:none;z-index:1;
+  filter:drop-shadow(0 4px 10px rgba(0,224,122,.3));
+}
+.fly-ball.b1{top:16%;left:8%;animation:floatBall 8s ease-in-out infinite}
+.fly-ball.b2{top:72%;left:12%;animation:floatBall 10s ease-in-out infinite reverse}
+.fly-ball.b3{top:22%;right:9%;animation:bounceBall 3.5s ease-in-out infinite}
+.fly-ball.b4{top:66%;right:13%;animation:floatBall 9s ease-in-out infinite}
+.fly-ball.b5{top:44%;left:4%;animation:bounceBall 4.2s ease-in-out infinite}
+.fly-ball.b6{top:50%;right:4%;animation:spinBall 12s linear infinite}
+
+.hero-content{position:relative;z-index:2;max-width:920px}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);border:2px solid rgba(0,224,122,.35);
+  background:rgba(0,224,122,.08);
+  padding:9px 20px;border-radius:99px;margin-bottom:28px;
+  font-weight:700;
+  animation:fadeUp .8s ease both, pulseGlow 2.6s ease-in-out infinite;
+}
+.hero h1{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(3.2rem,13vw,8.5rem);
+  line-height:.88;letter-spacing:2px;text-transform:uppercase;
+  background:linear-gradient(175deg,#ffffff 15%,#7cf0b4 55%,#0a9d5a 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero h1 span{
+  display:block;
+  background:linear-gradient(175deg,#ffe27a,#ffd54a 40%,#c99700 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{
+  color:var(--muted);font-size:clamp(.95rem,2vw,1.14rem);
+  max-width:640px;margin:26px auto 0;line-height:1.75;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px;
+  animation:fadeUp .8s .3s ease both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:15px 32px;border-radius:99px;font-weight:800;font-size:.92rem;
+  text-decoration:none;transition:.28s;border:none;cursor:pointer;
+  font-family:inherit;
+}
+.btn-primary{
+  background:var(--green);color:#04120b;
+  box-shadow:0 6px 0 #077a45, 0 16px 40px -14px rgba(0,224,122,.8);
+}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 10px 0 #077a45, 0 22px 50px -14px rgba(0,224,122,1)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 3px 0 #077a45}
+.btn-ghost{
+  border:2px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-4px)}
+
+.hero-stats{
+  position:relative;z-index:2;
+  display:flex;gap:clamp(24px,6vw,70px);flex-wrap:wrap;justify-content:center;
+  margin-top:70px;animation:fadeUp .8s .4s ease both;
+}
+.hstat{text-align:center;animation:floatUp 3.5s ease-in-out infinite}
+.hstat:nth-child(2){animation-delay:.4s}
+.hstat:nth-child(3){animation-delay:.8s}
+.hstat b{
+  display:block;font-family:'Anton',sans-serif;
+  font-size:clamp(1.9rem,5vw,2.7rem);line-height:1;color:var(--green);
+  text-shadow:0 4px 0 rgba(0,224,122,.18);
+}
+.hstat span{
+  font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+}
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
+section{padding:110px 24px;position:relative}
+.wrap{max-width:1280px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:64px}
+.sec-tag{
+  display:inline-block;font-size:.7rem;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--green);border:2px solid rgba(0,224,122,.3);
+  background:rgba(0,224,122,.06);
+  padding:8px 18px;border-radius:99px;margin-bottom:18px;font-weight:700;
+}
+.sec-head h2{
+  font-family:'Anton',sans-serif;text-transform:uppercase;
+  font-size:clamp(2rem,5.5vw,3.6rem);letter-spacing:1.5px;line-height:1;
+}
+.sec-head h2 em{
+  font-style:normal;
+  background:linear-gradient(175deg,#ffe27a,#ffd54a,#c99700);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sec-head p{color:var(--muted);max-width:620px;margin:18px auto 0;font-size:.95rem}
+
+/* =========================================================
+   CRAQUES — CARDS COM FOTO
+   ========================================================= */
+.players{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:30px;
+}
+.player{
+  position:relative;border-radius:26px;padding:0;
+  background:linear-gradient(180deg,var(--card),#0a1310);
+  border:3px solid rgba(255,255,255,.06);
+  overflow:hidden;
+  box-shadow:var(--cartoon-shadow);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s, box-shadow .45s;
+  animation:popIn .7s cubic-bezier(.2,.8,.2,1) both;
+}
+.player:nth-child(2){animation-delay:.15s}
+.player:nth-child(3){animation-delay:.3s}
+.player:hover{
+  transform:translateY(-12px) rotate(-.6deg);
+  border-color:var(--green);
+  box-shadow:10px 10px 0 rgba(0,224,122,.25), 0 34px 70px -30px rgba(0,224,122,.7);
+}
+.player:hover .player-photo img{transform:scale(1.08) rotate(1deg)}
+.player:hover .avatar-fallback{transform:scale(1.08) rotate(1deg)}
+
+/* Foto do jogador */
+.player-photo{
+  position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;
+  background:linear-gradient(135deg,#0d1f18,#0a1310);
+}
+.player-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.avatar-fallback{
+  width:100%;height:100%;display:grid;place-items:center;
+  font-family:'Anton',sans-serif;font-size:6rem;color:#04120b;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.player-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(6,11,9,.95) 100%);
+  pointer-events:none;
+}
+/* número gigante estilo cartoon */
+.player-number{
+  position:absolute;top:-10px;right:14px;
+  font-family:'Anton',sans-serif;font-size:7rem;line-height:1;
+  color:rgba(255,255,255,.16);z-index:2;pointer-events:none;
+  text-shadow:3px 3px 0 rgba(0,0,0,.5);
+  transition:transform .45s;
+}
+.player:hover .player-number{transform:rotate(-8deg) scale(1.08)}
+
+.player-body{padding:24px 26px 28px;position:relative;z-index:2}
+.player h3{
+  font-family:'Anton',sans-serif;font-size:1.65rem;letter-spacing:.8px;
+  text-transform:uppercase;line-height:1.05;
+  display:flex;align-items:center;gap:10px;
+}
+.player .pos{
+  font-size:.78rem;color:var(--green);letter-spacing:1.8px;
+  text-transform:uppercase;margin-top:6px;font-weight:700;
+}
+.player .bio{
+  color:var(--muted);font-size:.87rem;line-height:1.7;
+  margin:18px 0 20px;padding-bottom:20px;border-bottom:2px dashed var(--line);
+}
+.pstats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.pstat{
+  font-size:.72rem;padding:7px 14px;border-radius:99px;
+  background:rgba(0,224,122,.1);border:2px solid rgba(0,224,122,.22);
+  color:#a9f5cd;white-space:nowrap;font-weight:600;
+  transition:.3s;
+}
+.player:hover .pstat{background:rgba(0,224,122,.16);transform:translateY(-2px)}
+.club-title{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;font-weight:700;
+}
+.clubs{list-style:none;position:relative;padding-left:24px}
+.clubs::before{
+  content:'';position:absolute;left:6px;top:8px;bottom:8px;width:3px;
+  background:linear-gradient(180deg,var(--green),rgba(0,224,122,.05));
+  border-radius:3px;
+}
+.club{
+  position:relative;display:flex;align-items:center;gap:10px;
+  padding:8px 0;font-size:.86rem;
+}
+.club::before{
+  content:'';position:absolute;left:-23px;top:50%;transform:translateY(-50%);
+  width:12px;height:12px;border-radius:50%;
+  background:var(--green);border:2px solid #04120b;
+  box-shadow:0 0 0 2px rgba(0,224,122,.3);
+}
+.club .yr{
+  font-size:.7rem;color:var(--muted);min-width:86px;
+  font-variant-numeric:tabular-nums;letter-spacing:.3px;font-weight:600;
+}
+.club .nm{font-weight:600;flex:1}
+.club .fl{font-size:1rem;opacity:.9}
+
+/* =========================================================
+   MARQUEE FUTEBOL
+   ========================================================= */
+.marquee{
+  overflow:hidden;background:var(--green);color:#04120b;
+  padding:14px 0;border-top:3px solid #04120b;border-bottom:3px solid #04120b;
+  transform:rotate(-1.2deg);margin:0 -20px;
+}
+.marquee-track{
+  display:flex;gap:44px;white-space:nowrap;
+  animation:marquee 24s linear infinite;
+  font-family:'Anton',sans-serif;font-size:1.15rem;
+  letter-spacing:3px;text-transform:uppercase;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:14px}
+.marquee-track span::after{content:'⚽';font-size:1.1rem}
+
+/* =========================================================
+   PROJETOS — SEPARADOS
+   ========================================================= */
+#projetos{
+  background:
+    radial-gradient(900px 500px at 50% 0%, rgba(0,224,122,.05), transparent 70%),
+    var(--bg2);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.tools{
+  display:flex;flex-direction:column;gap:20px;align-items:center;margin-bottom:54px;
+}
+.search-box{position:relative;width:100%;max-width:460px}
+.search-box svg{
+  position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:2.4;
+}
+.search-box input{
+  width:100%;padding:16px 18px 16px 48px;border-radius:99px;
+  background:rgba(255,255,255,.04);border:2px solid var(--line);
+  color:var(--txt);font-size:.92rem;font-family:inherit;outline:none;
+  transition:.3s;font-weight:500;
+}
+.search-box input::placeholder{color:#5d7268}
+.search-box input:focus{
+  border-color:var(--green);
+  background:rgba(0,224,122,.06);
+  box-shadow:0 0 0 5px rgba(0,224,122,.1);
+}
+
+/* separadores Apps x Jogos */
+.group-head{
+  display:flex;align-items:center;gap:16px;margin:0 0 28px;
+}
+.group-head .ic{
+  width:54px;height:54px;border-radius:16px;flex:0 0 auto;
+  display:grid;place-items:center;font-size:1.5rem;
+  border:3px solid rgba(0,224,122,.25);
+  background:rgba(0,224,122,.09);
+  animation:floatUp 3.5s ease-in-out infinite;
+}
+.group-head .ic.games{
+  border-color:rgba(255,213,74,.3);
+  background:rgba(255,213,74,.1);
+}
+.group-head h3{
+  font-family:'Anton',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);
+  letter-spacing:1.2px;text-transform:uppercase;line-height:1;
+}
+.group-head h3 em{
+  font-style:normal;
+  background:linear-gradient(175deg,#7cf0b4,#00e07a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.group-head.games h3 em{
+  background:linear-gradient(175deg,#ffe27a,#ffd54a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.group-head .count{
+  font-size:.72rem;font-weight:800;letter-spacing:2px;
+  padding:6px 14px;border-radius:99px;
+  background:rgba(0,224,122,.12);color:var(--green);
+  border:2px solid rgba(0,224,122,.24);
+  margin-left:auto;
+}
+.group-head.games .count{
+  background:rgba(255,213,74,.12);color:var(--gold);
+  border-color:rgba(255,213,74,.28);
+}
+.group-sep{
+  height:3px;width:100%;margin:54px 0;
+  background:repeating-linear-gradient(90deg,var(--line) 0 12px, transparent 12px 24px);
+  border-radius:3px;
+}
+
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;
+}
+.proj{
+  display:flex;gap:15px;align-items:flex-start;
+  padding:20px;border-radius:20px;
+  background:var(--card);border:3px solid rgba(255,255,255,.05);
+  text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  box-shadow:4px 4px 0 rgba(0,0,0,.35);
+  transition:transform .32s cubic-bezier(.2,.8,.2,1), border-color .32s, box-shadow .32s;
+  animation:popIn .5s cubic-bezier(.2,.8,.2,1) both;
+}
+.proj::after{
+  content:'';position:absolute;top:0;left:0;height:100%;width:4px;
+  background:var(--green);transform:scaleY(0);transform-origin:top;
+  transition:transform .35s;
+}
+.proj:hover{
+  transform:translateY(-8px) rotate(-.8deg);
+  border-color:var(--green);
+  box-shadow:8px 8px 0 rgba(0,224,122,.28), 0 22px 45px -22px rgba(0,224,122,.7);
+}
+.proj:hover::after{transform:scaleY(1)}
+.proj-ico{
+  flex:0 0 auto;width:48px;height:48px;border-radius:14px;
+  display:grid;place-items:center;font-size:1.4rem;
+  background:rgba(0,224,122,.1);border:2px solid rgba(0,224,122,.2);
+  transition:.35s;
+}
+.proj:hover .proj-ico{
+  background:rgba(0,224,122,.2);
+  transform:scale(1.1) rotate(-8deg);
+}
+.proj-body{flex:1;min-width:0}
+.proj-body h4{
+  font-size:.95rem;font-weight:800;margin-bottom:5px;line-height:1.35;
+  display:flex;align-items:center;gap:7px;
+}
+.proj-body p{
+  font-size:.79rem;color:var(--muted);line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.proj-tag{
+  position:absolute;top:14px;right:14px;
+  font-size:.58rem;letter-spacing:1.6px;text-transform:uppercase;
+  padding:5px 10px;border-radius:99px;font-weight:900;
+  background:rgba(0,224,122,.14);color:var(--green);
+  border:2px solid rgba(0,224,122,.25);
+}
+.proj-tag.jogo{
+  background:rgba(255,213,74,.13);color:var(--gold);
+  border-color:rgba(255,213,74,.28);
+}
+
+/* jogos têm cartão amarelo, apps verde */
+.proj.is-game{border-color:rgba(255,213,74,.14)}
+.proj.is-game::after{background:var(--gold)}
+.proj.is-game:hover{
+  border-color:var(--gold);
+  box-shadow:8px 8px 0 rgba(255,213,74,.25), 0 22px 45px -22px rgba(255,213,74,.6);
+}
+.proj.is-game .proj-ico{
+  background:rgba(255,213,74,.1);border-color:rgba(255,213,74,.22);
+}
+.proj.is-game:hover .proj-ico{background:rgba(255,213,74,.2)}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted);
+}
+.empty span{font-size:2.6rem;display:block;margin-bottom:14px;opacity:.6}
+
+/* =========================================================
+   SOBRE
+   ========================================================= */
+.sobre-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;
+}
+.sobre-card{
+  padding:30px;border-radius:22px;
+  background:linear-gradient(180deg,var(--card),#0a1310);
+  border:3px solid rgba(255,255,255,.05);
+  box-shadow:var(--cartoon-shadow);
+  transition:.4s;
+}
+.sobre-card:hover{
+  transform:translateY(-8px) rotate(.6deg);
+  border-color:rgba(0,224,122,.4);
+}
+.sobre-card .ic{
+  width:54px;height:54px;border-radius:16px;display:grid;place-items:center;
+  font-size:1.5rem;background:rgba(0,224,122,.1);
+  border:2px solid rgba(0,224,122,.2);margin-bottom:18px;
+  animation:floatUp 3s ease-in-out infinite;
+}
+.sobre-card h4{font-size:1rem;margin-bottom:9px;font-weight:800}
+.sobre-card p{font-size:.84rem;color:var(--muted);line-height:1.7}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{
+  padding:56px 24px 40px;text-align:center;
+  border-top:1px solid var(--line);background:var(--bg);
+  position:relative;overflow:hidden;
+}
+footer .fbrand{
+  font-family:'Anton',sans-serif;font-size:1.6rem;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:12px;
+}
+footer .fbrand em{
+  font-style:normal;
+  background:linear-gradient(175deg,#ffe27a,#ffd54a,#c99700);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+footer p{color:var(--muted);font-size:.82rem}
+footer .line{
+  width:60px;height:4px;background:var(--green);border-radius:4px;
+  margin:22px auto 0;box-shadow:0 0 24px rgba(0,224,122,.7);
+}
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* =========================================================
+   BOTÃO TOPO
+   ========================================================= */
+#topBtn{
+  position:fixed;right:22px;bottom:22px;z-index:99;
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--green);color:#04120b;font-size:1.3rem;font-weight:900;
+  display:grid;place-items:center;
+  opacity:0;pointer-events:none;transform:translateY(16px);
+  transition:.35s;
+  box-shadow:0 6px 0 #077a45, 0 14px 34px -12px rgba(0,224,122,.9);
+}
+#topBtn.show{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{transform:translateY(-4px)}
+#topBtn:active{transform:translateY(2px);box-shadow:0 3px 0 #077a45}
+
+/* =========================================================
+   CONFETES (cartoon)
+   ========================================================= */
+.confetti{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;overflow:hidden;
+}
+.confetti i{
+  position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;
+  animation:confettiFall linear forwards;
+}
+
+@media(max-width:520px){
+  section{padding:80px 18px}
+  .player-body{padding:20px}
+  .hero-stats{gap:26px}
+  .marquee{transform:rotate(-2deg)}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="ball">⚽</span> Portfólio<em>FC</em></a>
+    <nav class="nav-links">
+      <a href="#craques">Craques</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+
+    <!-- bolas flutuantes -->
+    <span class="fly-ball b1">⚽</span>
+    <span class="fly-ball b2">⚽</span>
+    <span class="fly-ball b3">⚽</span>
+    <span class="fly-ball b4">⚽</span>
+    <span class="fly-ball b5">⚽</span>
+    <span class="fly-ball b6">⚽</span>
+
+    <div class="hero-content">
+      <div class="badge">⚽ Onde o futebol encontra o código</div>
+      <h1>Portfólio<span>FC</span></h1>
+      <p class="lead">
+        Uma coleção de projetos web criados por mim — e uma homenagem aos três maiores
+        craques do século: <strong>Neymar</strong>, <strong>Messi</strong> e
+        <strong>Cristiano Ronaldo</strong>. Todos os clubes, todos os códigos, um só lugar.
+      </p>
+      <div class="hero-btns">
+        <a href="#projetos" class="btn btn-primary">🚀 Ver Projetos</a>
+        <a href="#craques" class="btn btn-ghost">⭐ Conhecer os Craques</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat"><b id="statPlayers">3</b><span>Craques</span></div>
+      <div class="hstat"><b id="statProjects">37</b><span>Projetos</span></div>
+      <div class="hstat"><b id="statClubs">18</b><span>Clubes</span></div>
+    </div>
+  </section>
+
+  <!-- ================= CRAQUES ================= -->
+  <section id="craques">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">⭐ Galeria de Craques</div>
+        <h2>Os <em>Maiores</em> do Século</h2>
+        <p>Três gênios, três trajetórias lendárias. Confira todos os clubes por onde cada um passou.</p>
+      </div>
+      <div class="players" id="playersGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Neymar Jr.</span><span>Lionel Messi</span><span>Cristiano Ronaldo</span>
+      <span>⚽ Futebol &amp; Código</span><span>Neymar Jr.</span><span>Lionel Messi</span>
+      <span>Cristiano Ronaldo</span><span>⚽ Futebol &amp; Código</span>
+    </div>
+  </div>
+
+  <!-- ================= PROJETOS ================= -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">🧩 Meus Projetos</div>
+        <h2>Apps &amp; <em>Jogos</em></h2>
+        <p>Separados por categoria. Use a busca para encontrar qualquer projeto rapidamente.</p>
+      </div>
+
+      <div class="tools reveal">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar projeto... (ex: pizzaria, portfólio, pacman)">
+        </div>
+      </div>
+
+      <!-- APPS -->
+      <div class="group-head reveal" id="appsHead">
+        <div class="ic">💻</div>
+        <h3>Aplicativos <em>Web</em></h3>
+        <span class="count" id="countApps">0</span>
+      </div>
+      <div class="projects" id="appsGrid"></div>
+
+      <!-- SEPARADOR -->
+      <div class="group-sep" id="groupSep"></div>
+
+      <!-- JOGOS -->
+      <div class="group-head games reveal" id="gamesHead">
+        <div class="ic games">🎮</div>
+        <h3>Jogos <em>Interativos</em></h3>
+        <span class="count" id="countGames">0</span>
+      </div>
+      <div class="projects" id="gamesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= SOBRE ================= -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">📌 Sobre</div>
+        <h2>Como esse <em>Portfólio</em> Funciona</h2>
+      </div>
+      <div class="sobre-grid">
+        <div class="sobre-card reveal">
+          <div class="ic">⚽</div>
+          <h4>Paixão por Futebol</h4>
+          <p>Neymar, Messi e Cristiano Ronaldo são os ícones escolhidos para representar a dedicação, a consistência e a busca pela excelência — valores que levo para o código.</p>
+        </div>
+        <div class="sobre-card reveal">
+          <div class="ic">💻</div>
+          <h4>Apps &amp; Jogos</h4>
+          <p>São 37 projetos no total, agora separados em duas categorias: aplicativos web e jogos interativos. Todos hospedados no GitHub Pages.</p>
+        </div>
+        <div class="sobre-card reveal">
+          <div class="ic">🔍</div>
+          <h4>Busca Instantânea</h4>
+          <p>Digite qualquer parte do nome ou descrição para filtrar os projetos em tempo real, tanto nos apps quanto nos jogos.</p>
+        </div>
+        <div class="sobre-card reveal">
+          <div class="ic">🎨</div>
+          <h4>Estilo Cartoon</h4>
+          <p>Animações de bola, cards com sombras duras, cores vibrantes e microinterações divertidas em todo o site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="fbrand">Portfólio<em>FC</em> ⚽</div>
+  <p>Neymar · Messi · Cristiano Ronaldo — e todos os meus projetos em um só lugar.</p>
+  <p style="margin-top:8px;font-size:.75rem;opacity:.65">Feito com HTML, CSS e JavaScript puro.</p>
+  <div class="line"></div>
+</footer>
+
+<button id="topBtn" title="Voltar ao topo">↑</button>
+
+<script>
+/* =========================================================
+   DADOS — CRAQUES (com imagens)
+   ========================================================= */
+const players = [
+  {
+    name: 'Neymar Jr.',
+    initial: 'N',
+    number: '10',
+    pos: 'Atacante · Ponta-Esquerda',
+    gradient: 'linear-gradient(135deg,#ffe27a,#00e07a)',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03.jpg/480px-Neymar_Jr._with_Al_Hilal%2C_3_October_2023_-_03.jpg',
+    bio: 'Maior artilheiro da história da Seleção Brasileira masculina, campeão olímpico em 2016 e da UEFA Champions League em 2015. Um dos jogadores mais técnicos de sua geração.',
+    stats: ['⚽ 430+ gols', '🏆 30+ títulos', '🥇 Ouro Olímpico 2016'],
+    clubs: [
+      { name: 'Santos FC',           years: '2009 – 2013', flag: '🇧🇷' },
+      { name: 'FC Barcelona',        years: '2013 – 2017', flag: '🇪🇸' },
+      { name: 'Paris Saint-Germain', years: '2017 – 2023', flag: '🇫🇷' },
+      { name: 'Al-Hilal',            years: '2023 – 2025', flag: '🇸🇦' },
+      { name: 'Santos FC',           years: '2025 –',      flag: '🇧🇷' },
+      { name: 'Seleção Brasileira',  years: '2010 –',      flag: '🇧🇷' }
+    ]
+  },
+  {
+    name: 'Lionel Messi',
+    initial: 'M',
+    number: '30',
+    pos: 'Atacante · Meia-Atacante',
+    gradient: 'linear-gradient(135deg,#8fd3ff,#7cf0b4)',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/480px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg',
+    bio: 'Campeão do Mundo em 2022, oito vezes vencedor da Bola de Ouro e maior artilheiro da história do FC Barcelona e da Seleção Argentina.',
+    stats: ['⚽ 850+ gols', '🏅 8 Bolas de Ouro', '🏆 Copa do Mundo 2022'],
+    clubs: [
+      { name: 'Newell\'s Old Boys',  years: '1994 – 2000', flag: '🇦🇷' },
+      { name: 'FC Barcelona',        years: '2000 – 2021', flag: '🇪🇸' },
+      { name: 'Paris Saint-Germain', years: '2021 – 2023', flag: '🇫🇷' },
+      { name: 'Inter Miami CF',      years: '2023 –',      flag: '🇺🇸' },
+      { name: 'Seleção Argentina',   years: '2005 –',      flag: '🇦🇷' }
+    ]
+  },
+  {
+    name: 'Cristiano Ronaldo',
+    initial: 'C',
+    number: '7',
+    pos: 'Atacante · Ponta / Centroavante',
+    gradient: 'linear-gradient(135deg,#ffd54a,#ff8a5b)',
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/480px-Cristiano_Ronaldo_2018.jpg',
+    bio: 'Maior artilheiro da história do futebol em jogos oficiais, cinco vezes Bola de Ouro, campeão da Eurocopa 2016 e da Nations League 2019.',
+    stats: ['⚽ 900+ gols', '🏅 5 Bolas de Ouro', '🇪🇺 Euro 2016'],
+    clubs: [
+      { name: 'Sporting CP',         years: '2002 – 2003', flag: '🇵🇹' },
+      { name: 'Manchester United',   years: '2003 – 2009', flag: '🏴' },
+      { name: 'Real Madrid',         years: '2009 – 2018', flag: '🇪🇸' },
+      { name: 'Juventus',            years: '2018 – 2021', flag: '🇮🇹' },
+      { name: 'Manchester United',   years: '2021 – 2022', flag: '🏴' },
+      { name: 'Al-Nassr',            years: '2023 –',      flag: '🇸🇦' },
+      { name: 'Seleção Portuguesa',  years: '2003 –',      flag: '🇵🇹' }
+    ]
+  }
+];
+
+/* =========================================================
+   DADOS — PROJETOS
+   ========================================================= */
+const htmlApps = [
+  { title: '🏋️ Album da Copa', desc: 'APP da Copa do Mundo.', url: 'https://augusto324hs.github.io/albumcopa.html/index5.html', tag: 'HTML' },
+  { title: '🏋️ Album da Copa 2', desc: 'Outro APP da Copa do Mundo.', url: 'https://augusto324hs.github.io/copa.html/copa.html', tag: 'HTML' },
+  { title: '🏋️ Academia Fitness', desc: 'Gestão de academia completa.', url: 'https://augusto324hs.github.io/academia/academia.html', tag: 'HTML' },
+  { title: '🏋️ Academia Fitness 2', desc: 'Outra gestão de academia completa.', url: 'https://augusto324hs.github.io/academia/academia.html', tag: 'HTML' },
+  { title: '☕ Cafeteria', desc: 'Site aconchegante.', url: 'https://augusto324hs.github.io/todos-/cafeteria.html', tag: 'HTML' },
+  { title: '☕ Cafeteria 2', desc: 'Versão alternativa.', url: 'https://augusto324hs.github.io/cafeteria.html/menu-principal.html', tag: 'HTML' },
+  { title: '🎁 Colecionáveis', desc: 'Exibição de itens colecionáveis.', url: 'https://augusto324hs.github.io/colecionaveis2/logo.html', tag: 'HTML' },
+  { title: '🎁 Conselho Classe', desc: 'Versão alternativa.', url: 'https://augusto324hs.github.io/conselho/classe.html', tag: 'HTML' },
+  { title: '🐾 ClassDojo', desc: 'Sistema de gestão de turmas.', url: 'https://augusto324hs.github.io/class/clasdojo.html', tag: 'HTML' },
+  { title: '🐾 biblioteca', desc: 'Sistema de gestão de livros.', url: 'https://augusto324hs.github.io/livro2/livro.html', tag: 'HTML' },
+  { title: '🎵 FL Studio', desc: 'Sequenciador de batidas.', url: 'https://augusto324hs.github.io/beat/fl.html', tag: 'HTML' },
+  { title: '🎵 Guia para Computadores', desc: 'Um manual para inciantes.', url: 'https://augusto324hs.github.io/guia-de-computador/guia.html#atalhos', tag: 'HTML' },
+  { title: '🎬 Locadora', desc: 'Sistema de locadora.', url: 'https://augusto324hs.github.io/todos-/locadora.html', tag: 'HTML' },
+  { title: '🎬 Locadora 2', desc: 'Versão alternativa.', url: 'https://augusto324hs.github.io/locadora/menu%20principal.html', tag: 'HTML' },
+  { title: '🎮 Marcar Jogos', desc: 'Organize partidas.', url: 'https://augusto324hs.github.io/todos-/index.html', tag: 'HTML' },
+  { title: '🐾 Petshop', desc: 'Site para petshop.', url: 'https://cesarfernandesa2-ops.github.io/petshop2.0.html/petshop.html', tag: 'HTML' },
+  { title: '🍕 Pizzaria', desc: 'Site com cardápio e pedidos.', url: 'https://cesarfernandesa2-ops.github.io/pizzaria.html/pizzaria.html', tag: 'HTML' },
+  { title: '🍕 Pizzaria 2', desc: 'Versão alternativa.', url: 'https://augusto324hs.github.io/todos-/pizzaria.html', tag: 'HTML' },
+  { title: '🎨 Portfólio GOJO', desc: 'Portfólio temático.', url: 'https://augusto324hs.github.io/portif-liogojo.html/gojo.html', tag: 'HTML' },
+  { title: '🎨 Portfólio Interestelar', desc: 'Portfólio do Espaço.', url: 'https://augusto324hs.github.io/portifolio3.0.html/portif%C3%B3lio.html', tag: 'HTML' },
+  { title: '🎨 Portfólio Super Mario', desc: 'Portfólio do Mario.', url: 'https://augusto324hs.github.io/portimario/portimario.html', tag: 'HTML' },
+  { title: '🎨 Polo Colégio', desc: 'APP do meu Colégio.', url: 'file:///C:/novos%20sites%202026/polo.html', tag: 'HTML' },
+  { title: '⚽ Série B', desc: 'Portal da Série B.', url: 'https://augusto324hs.github.io/serie/serieB.html', tag: 'HTML' },
+  { title: '⚽ Site 1B', desc: 'Gerenciamento de Frotas', url: 'https://augusto324hs.github.io/1b/site1B.html', tag: 'HTML' },
+  { title: '⚽ Site 1B 2', desc: 'Gerenciamento de Pré-Conselho de Classe', url: 'https://augusto324hs.github.io/1b-2/site1B%202.html', tag: 'HTML' },
+  { title: '🚚 Transportadora', desc: 'Gerenciamento de fretes.', url: 'https://augusto324hs.github.io/todos-/transportadora.html', tag: 'HTML' },
+  { title: '🚚 Transportadora 2', desc: 'Outra versão.', url: 'https://augusto324hs.github.io/transportadora/logo.html#servicos', tag: 'HTML' },
+  { title: '🚚 Transportadora 3', desc: 'Sim, outra versão.', url: 'https://augusto324hs.github.io/transportadora2.html/transportadora2.html', tag: 'HTML' },
+  { title: '🧩 Todas as Telas', desc: 'Hub central de links.', url: 'https://augusto324hs.github.io/todos-/telas.html', tag: 'HTML' },
+  { title: '🧩 Viagens', desc: 'Gerenciamento de Viagens', url: 'https://augusto324hs.github.io/viagens.html/index.html', tag: 'HTML' },
+  { title: '🧩 Viagens 2', desc: 'Outro gerenciamento de Viagens', url: 'https://augusto324hs.github.io/index3.html/index3.html', tag: 'HTML' }
+];
+
+const htmlGames = [
+  { title: '🎮 Auto Escola', desc: 'Um jogo ou manual para iniciantes de Auto Escola.', url: 'https://augusto324hs.github.io/auto-escola/autoescola.html', tag: 'Jogo' },
+  { title: '🎮 FPS', desc: 'Jogo clássico de Tiro.', url: 'https://augusto324hs.github.io/FPS/fps.html', tag: 'Jogo' },
+  { title: '🎮 Fazenda3D', desc: 'Experiência 3D.', url: 'https://augusto324hs.github.io/jardim/fazenda3D.html', tag: 'Jogo' },
+  { title: '🏰 Fazenda3D 2', desc: 'Versão alternativa.', url: 'https://augusto324hs.github.io/fazenda3D.html/fazenda3D.html', tag: 'Jogo' },
+  { title: '🏆 Montar Time', desc: 'Jogo de colecionar figurinhas.', url: 'https://augusto324hs.github.io/card2/card2.html', tag: 'Jogo' },
+  { title: '🏆 Montar Time 2', desc: 'Outro jogo de colecionar figurinhas.', url: 'https://augusto324hs.github.io/card/card.html', tag: 'Jogo' },
+  { title: '🎮 Pacman', desc: 'Jogo clássico do Pacman.', url: 'https://cesarfernandesa2-ops.github.io/pacmam.html/pacmam.html', tag: 'Jogo' }
+];
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+function splitTitle(t){
+  const m = t.match(/^([^\p{L}\p{N}]+)\s*(.*)$/u);
+  if (m && m[2]) return { icon: m[1].trim(), text: m[2] };
+  return { icon: '📄', text: t };
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => (
+    { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
+  ));
+}
+
+/* =========================================================
+   RENDER — CRAQUES
+   ========================================================= */
+function renderPlayers(){
+  const grid = document.getElementById('playersGrid');
+  grid.innerHTML = players.map(p => `
+    <article class="player reveal">
+      <div class="player-photo">
+        <img src="${p.photo}"
+             alt="${escapeHtml(p.name)}"
+             loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+        <div class="avatar-fallback" style="background:${p.gradient};display:none">${p.initial}</div>
+        <div class="player-number">${p.number}</div>
+      </div>
+      <div class="player-body">
+        <h3>${escapeHtml(p.name)}</h3>
+        <div class="pos">${escapeHtml(p.pos)}</div>
+        <p class="bio">${escapeHtml(p.bio)}</p>
+        <div class="pstats">
+          ${p.stats.map(s => `<span class="pstat">${escapeHtml(s)}</span>`).join('')}
+        </div>
+        <div class="club-title">Clubes &amp; Seleção</div>
+        <ul class="clubs">
+          ${p.clubs.map(c => `
+            <li class="club">
+              <span class="yr">${escapeHtml(c.years)}</span>
+              <span class="nm">${escapeHtml(c.name)}</span>
+              <span class="fl">${c.flag}</span>
+            </li>`).join('')}
+        </ul>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* =========================================================
+   RENDER — PROJETOS (separados)
+   ========================================================= */
+const appsGrid   = document.getElementById('appsGrid');
+const gamesGrid  = document.getElementById('gamesGrid');
+const countApps  = document.getElementById('countApps');
+const countGames = document.getElementById('countGames');
+const searchInp  = document.getElementById('searchInput');
+
+function projectCard(p, isGame){
+  const { icon, text } = splitTitle(p.title);
+  return `
+    <a class="proj ${isGame ? 'is-game' : ''}" href="${p.url}" target="_blank" rel="noopener noreferrer">
+      <span class="proj-tag ${isGame ? 'jogo' : ''}">${escapeHtml(p.tag)}</span>
+      <div class="proj-ico">${icon}</div>
+      <div class="proj-body">
+        <h4>${escapeHtml(text)}</h4>
+        <p>${escapeHtml(p.desc)}</p>
+      </div>
+    </a>`;
+}
+
+function renderProjects(){
+  const term = searchInp.value.trim().toLowerCase();
+
+  const filterFn = p => !term ||
+    p.title.toLowerCase().includes(term) ||
+    p.desc.toLowerCase().includes(term) ||
+    p.tag.toLowerCase().includes(term);
+
+  const apps  = htmlApps.filter(filterFn);
+  const games = htmlGames.filter(filterFn);
+
+  countApps.textContent  = apps.length + ' apps';
+  countGames.textContent = games.length + ' jogos';
+
+  if (apps.length){
+    appsGrid.innerHTML = apps.map(p => projectCard(p, false)).join('');
+  } else {
+    appsGrid.innerHTML = `<div class="empty"><span>🔍</span>Nenhum app encontrado.</div>`;
+  }
+
+  if (games.length){
+    gamesGrid.innerHTML = games.map(p => projectCard(p, true)).join('');
+  } else {
+    gamesGrid.innerHTML = `<div class="empty"><span>🔍</span>Nenhum jogo encontrado.</div>`;
+  }
+}
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
+searchInp.addEventListener('input', renderProjects);
+
+/* =========================================================
+   REVEAL ON SCROLL
+   ========================================================= */
+function observeReveals(){
+  const els = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('in'), i * 70);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => io.observe(el));
+}
+
+/* =========================================================
+   BOTÃO TOPO
+   ========================================================= */
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', () => {
+  topBtn.classList.toggle('show', window.scrollY > 600);
+});
+topBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* =========================================================
+   CONFETES CARTOON (ao clicar no logo)
+   ========================================================= */
+const confettiColors = ['#00e07a','#ffd54a','#ff8a5b','#5ec8ff','#ffffff'];
+function throwConfetti(){
+  const wrap = document.createElement('div');
+  wrap.className = 'confetti';
+  document.body.appendChild(wrap);
+  for (let i = 0; i < 60; i++){
+    const piece = document.createElement('i');
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+    piece.style.animationDuration = (1.6 + Math.random() * 1.4) + 's';
+    piece.style.animationDelay = (Math.random() * 0.4) + 's';
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (10 + Math.random() * 10) + 'px';
+    if (Math.random() > .5) piece.style.borderRadius = '50%';
+    wrap.appendChild(piece);
+  }
+  setTimeout(() => wrap.remove(), 3400);
+}
+document.querySelector('.brand').addEventListener('click', (e) => {
+  e.preventDefault();
+  throwConfetti();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* =========================================================
+   INIT
+   ========================================================= */
+(function init(){
+  renderPlayers();
+  renderProjects();
+
+  const totalClubs = players.reduce((acc, p) => acc + p.clubs.length, 0);
+  document.getElementById('statPlayers').textContent  = players.length;
+  document.getElementById('statProjects').textContent = htmlApps.length + htmlGames.length;
+  document.getElementById('statClubs').textContent    = totalClubs;
+
+  observeReveals();
+})();
+</script>
+</body>
+</html>
